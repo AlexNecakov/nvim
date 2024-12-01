@@ -1,4 +1,3 @@
-
 [
   (block)
   (enum_declaration)
