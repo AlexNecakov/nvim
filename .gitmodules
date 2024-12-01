@@ -1,0 +1,6 @@
+[submodule "lua/alex/external/Jails"]
+	path = lua/alex/external/Jails
+	url = https://github.com/SogoCZE/Jails
+[submodule "lua/alex/external/tree-sitter-jai"]
+	path = lua/alex/external/tree-sitter-jai
+	url = https://github.com/St0wy/tree-sitter-jai

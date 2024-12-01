@@ -72,9 +72,23 @@ return {
                 end,
             },
         })
+        lsp_zero.new_client({
+            name = "jails",
+            cmd = { vim.fn.stdpath("config") .. "/lua/alex/external/jails/bin/jails.exe" },
+            filetypes = { "jai" },
+            autostart = true,
+            root_dir = function()
+                local root_dir = lsp_zero.dir.find_first({ 'build.jai', 'first.jai', 'main.jai' })
+                    or vim.fn.getcwd();
+                return root_dir;
+            end
+
+        })
+        require("lspconfig").jails.setup({})
+        vim.filetype.add({ extension = { jai = "jai", } })
+
         local cmp = require('cmp')
         local cmp_action = lsp_zero.cmp_action()
-
         cmp.setup({
             sources = {
                 { name = 'nvim_lsp' },

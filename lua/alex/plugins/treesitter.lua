@@ -34,5 +34,21 @@ return {
                 additional_vim_regex_highlighting = { "markdown" },
             },
         })
+        local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
+        parser_config.jai = {
+            install_info = {
+                url = vim.fn.stdpath("config") .. "/lua/alex/external/tree-sitter-jai/",
+                files = { "src/parser.c" },
+            },
+            filetype = "jai",
+            filetype_to_parsername = "jai",
+            indent = {
+                enable = true
+            },
+            highlight = {
+                enable = true
+            },
+        }
+        vim.treesitter.language.register('jai', 'jai')
     end
 }
