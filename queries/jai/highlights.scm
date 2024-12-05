@@ -9,6 +9,7 @@
 [
   "struct"
   "enum"
+  "enum_flags"
   "if"
   "ifx"
   "else"
@@ -51,7 +52,14 @@
 
 ; Variables
 
-(identifier) @variable
+; (identifier) @variable
+name: (identifier) @variable
+argument: (identifier) @variable
+named_argument: (identifier) @variable
+
+
+((identifier) @variable.builtin
+  (#any-of? @variable.builtin "context"))
 
 ; Namespaces
 
@@ -61,8 +69,6 @@
 
 (parameter (identifier) @parameter ":" "="? (identifier)? @constant)
 
-(call_expression argument: (identifier) @parameter "=")
-
 ; Functions
 
 (procedure_declaration (identifier) @function (procedure (block)))
@@ -71,7 +77,12 @@
 
 ; Types
 
-; (types (identifier) @type)
+type: (types) @type
+type: (identifier) @type
+((types) @type)
+
+modifier: (identifier) @keyword
+keyword: (identifier) @keyword
 
 ((types (identifier) @type.builtin)
   (#any-of? @type.builtin
@@ -80,7 +91,6 @@
     "u8" "u16" "u32" "u64"
     "Type" "Any"))
 
-
 (struct_declaration (identifier) @type ":" ":")
 
 (enum_declaration (identifier) @type ":" ":")
@@ -88,21 +98,18 @@
 (const_declaration (identifier) @type ":" ":" [(array_type) (pointer_type)])
 
 (struct_literal . (identifier) @type)
-; (array_literal . (identifier) @type)
+(array_literal . (identifier) @type)
 
-((identifier) @type
-  (#lua-match? @type "^[A-Z][a-zA-Z0-9]*$")
-  (#not-has-parent? @type parameter procedure_declaration call_expression))
+; ; I don't like this
+; ((identifier) @type
+;   (#lua-match? @type "^[A-Z][a-zA-Z0-9]*$")
+;   (#not-has-parent? @type parameter procedure_declaration call_expression))
 
 ; Fields
 
 (member_expression "." (identifier) @field)
 
-; (anonymous_struct_type "{" (identifier) @field)
-
 (assignment_statement (identifier) @field "="?)
-
-(struct_declaration_field (identifier) @field)
 
 ; Constants
 
@@ -116,7 +123,8 @@
 
 ; Literals
 
-(number) @number
+(integer) @number
+(float) @number
 
 (string) @string
 
@@ -130,9 +138,6 @@
   (uninitialized)
   (null)
 ] @constant.builtin
-
-((identifier) @variable.builtin
-  (#any-of? @variable.builtin "context"))
 
 ; Operators
 
@@ -156,6 +161,8 @@
   "&~"
   "<<"
   ">>"
+  "<<<"
+  ">>>"
   "||"
   "&&"
   "!"
@@ -170,6 +177,8 @@
   "^="
   "<<="
   ">>="
+  "<<<="
+  ">>>="
   "||="
   "&&="
 ] @operator
@@ -201,5 +210,5 @@
 
 (ERROR) @error
 
-(number) @number
 (block_comment) @comment
+

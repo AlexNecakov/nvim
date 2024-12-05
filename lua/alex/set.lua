@@ -25,6 +25,10 @@ vim.opt.isfname:append("@-@")
 
 vim.opt.colorcolumn = "80"
 
+vim.opt.list = true
+vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+
+vim.opt.updatetime = 250
 
 if vim.fn.has('win32') == 1 then
     vim.opt.undodir = os.getenv("USERPROFILE") .. "/.vim/undodir"
