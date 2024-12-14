@@ -1,0 +1,22 @@
+# vscode_extension
+node_modules/
+out/
+*.vsix
+
+# Jai
+.build/
+bin/
+
+# Mac
+.DS_Store
+*.dSYM
+*.dylib
+
+# Windows
+*.dll
+*.exp
+*.lib
+*.pdb
+
+# Linux
+*.so

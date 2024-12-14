@@ -1,0 +1,10 @@
+{
+    "local_modules": [
+        "cmd/modules"
+    ],
+    "roots": [
+        "cmd/src/main.jai",
+        "cmd/build.jai"
+    ],
+    "build_root": "cmd/build.jai"
+}

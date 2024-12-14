@@ -1,0 +1,7 @@
+.build/
+*.dSYM
+main
+build/
+bin/
+out/
+.DS_Store

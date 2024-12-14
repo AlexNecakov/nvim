@@ -81,7 +81,7 @@ return {
         })
         lsp_zero.new_client({
             name = "jails",
-            cmd = { vim.fn.stdpath("config") .. "/lua/alex/external/jails/bin/jails" },
+            cmd = { vim.fn.stdpath("config") .. "/lua/external/jails/bin/jails" },
             filetypes = { "jai" },
             autostart = true,
             root_dir = function()

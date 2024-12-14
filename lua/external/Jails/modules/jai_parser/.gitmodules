@@ -1,0 +1,3 @@
+[submodule "cmd/modules/Jason"]
+	path = cmd/modules/Jason
+	url = https://github.com/rluba/Jason
