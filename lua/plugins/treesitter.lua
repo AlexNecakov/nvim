@@ -4,11 +4,22 @@ return {
     config = function()
         require("nvim-treesitter.configs").setup({
             ensure_installed = {
-                "c", "c_sharp", "cmake", "cpp", "css", "diff",
-                "gitignore", "gitcommit", "git_config",
-                "go", "hlsl", "html", "http", "java", "javascript", "json", "lua", "make", "markdown",
-                "nginx", "objc", "odin", "php", "powershell", "python", "regex", "rust", "sql",
-                "ssh_config", "typescript", "vim", "vimdoc", "xml", "yaml", "zig",
+                "c",
+                "c_sharp",
+                "cpp",
+                "css",
+                "diff",
+                "gitignore",
+                "go",
+                "html",
+                "http",
+                "json",
+                "lua",
+                "markdown",
+                "powershell",
+                "python",
+                "typescript",
+                "xml",
             },
 
             sync_install = false,
