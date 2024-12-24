@@ -1,3 +1,0 @@
-[submodule "lua/external/Jails"]
-	path = lua/external/Jails
-	url = https://github.com/SogoCZE/Jails

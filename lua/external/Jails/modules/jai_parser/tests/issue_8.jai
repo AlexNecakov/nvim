@@ -1,1 +1,0 @@
-rectangle[cast(s64) opposite_lower_strategy ^ 1]
