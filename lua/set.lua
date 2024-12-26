@@ -30,6 +30,10 @@ vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 
 vim.opt.updatetime = 250
 
+vim.g.netrw_banner = 0
+vim.g.netrw_winsize = 25
+vim.g.netrw_browse_split = 0
+
 if vim.fn.has('win32') == 1 then
     vim.opt.undodir = os.getenv("USERPROFILE") .. "/.vim/undodir"
     vim.o.shell = 'pwsh'
@@ -42,7 +46,3 @@ if vim.fn.has('win32') == 1 then
 else
     vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 end
-
-vim.g.netrw_banner = 0
-vim.g.netrw_winsize = 25
-vim.g.netrw_browse_split = 0
