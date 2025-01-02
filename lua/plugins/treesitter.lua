@@ -2,6 +2,23 @@ return {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
     config = function()
+        local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
+        parser_config.jai = {
+            install_info = {
+                url = "https://github.com/constantitus/tree-sitter-jai",
+                files = { "src/parser.c" },
+                branch = "master",
+            },
+            filetype = "jai",
+            filetype_to_parsername = "jai",
+            indent = {
+                enable = true
+            },
+            highlight = {
+                enable = true
+            },
+        }
+
         require("nvim-treesitter.configs").setup({
             ensure_installed = {
                 "c",
@@ -13,6 +30,7 @@ return {
                 "go",
                 "html",
                 "http",
+                "jai",
                 "json",
                 "lua",
                 "markdown",
@@ -32,22 +50,6 @@ return {
                 additional_vim_regex_highlighting = { "markdown" },
             },
         })
-        local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
-        parser_config.jai = {
-            install_info = {
-                url = "https://github.com/constantitus/tree-sitter-jai",
-                files = { "src/parser.c" },
-                branch = "master",
-            },
-            filetype = "jai",
-            filetype_to_parsername = "jai",
-            indent = {
-                enable = true
-            },
-            highlight = {
-                enable = true
-            },
-        }
-        vim.treesitter.language.register('jai', 'jai')
+        vim.filetype.add({ extension = { jai = 'jai', }, })
     end
 }

@@ -56,7 +56,7 @@
 name: (identifier) @variable
 argument: (identifier) @variable
 named_argument: (identifier) @variable
-
+(member_expression (identifier) @parameter)
 
 ((identifier) @variable.builtin
   (#any-of? @variable.builtin "context"))
@@ -69,9 +69,11 @@ named_argument: (identifier) @variable
 
 (parameter (identifier) @parameter ":" "="? (identifier)? @constant)
 
+; (call_expression argument: (identifier) @parameter "=")
+
 ; Functions
 
-(procedure_declaration (identifier) @function (procedure (block)))
+(procedure_declaration (identifier) @function (block))
 
 (call_expression function: (identifier) @function.call)
 
@@ -109,7 +111,10 @@ keyword: (identifier) @keyword
 
 (member_expression "." (identifier) @field)
 
+; (anonymous_struct_type "{" (identifier) @field)
+
 (assignment_statement (identifier) @field "="?)
+(update_statement (identifier) @field)
 
 ; Constants
 
@@ -130,7 +135,7 @@ keyword: (identifier) @keyword
 
 ;(character) @character
 
-(escape_sequence) @string.escape
+(string (escape_sequence) @string.escape)
 
 (boolean) @boolean
 
@@ -211,4 +216,3 @@ keyword: (identifier) @keyword
 (ERROR) @error
 
 (block_comment) @comment
-
