@@ -1,16 +1,22 @@
 ; Includes
 
 [
-  "#import"
-  "#load"
+  (import)
+  (load)
 ] @include
+
 
 ; Keywords
 [
+  "inline"
+  "no_inline"
   "struct"
+  "union"
+  "using"
   "enum"
   "enum_flags"
   "if"
+  "then"
   "ifx"
   "else"
   "case"
@@ -18,9 +24,11 @@
   "while"
   "break"
   "continue"
+  "remove"
   "defer"
   "cast"
   "xx"
+  "push_context"
 ] @keyword
 
 [
@@ -56,7 +64,8 @@
 name: (identifier) @variable
 argument: (identifier) @variable
 named_argument: (identifier) @variable
-(member_expression (identifier) @parameter)
+(member_expression (identifier) @variable)
+(parenthesized_expression (identifier) @variable)
 
 ((identifier) @variable.builtin
   (#any-of? @variable.builtin "context"))
@@ -73,6 +82,7 @@ named_argument: (identifier) @variable
 
 ; Functions
 
+; (procedure_declaration (identifier) @function (procedure (block)))
 (procedure_declaration (identifier) @function (block))
 
 (call_expression function: (identifier) @function.call)
@@ -97,10 +107,7 @@ keyword: (identifier) @keyword
 
 (enum_declaration (identifier) @type ":" ":")
 
-(const_declaration (identifier) @type ":" ":" [(array_type) (pointer_type)])
-
-(struct_literal . (identifier) @type)
-(array_literal . (identifier) @type)
+; (const_declaration (identifier) @type ":" ":" [(array_type) (pointer_type)])
 
 ; ; I don't like this
 ; ((identifier) @type
@@ -110,8 +117,6 @@ keyword: (identifier) @keyword
 ; Fields
 
 (member_expression "." (identifier) @field)
-
-; (anonymous_struct_type "{" (identifier) @field)
 
 (assignment_statement (identifier) @field "="?)
 (update_statement (identifier) @field)
@@ -197,6 +202,7 @@ keyword: (identifier) @keyword
 [ "[" "]" ] @punctuation.bracket
 
 [
+  "`"
   "->"
   "."
   ","
@@ -216,3 +222,11 @@ keyword: (identifier) @keyword
 (ERROR) @error
 
 (block_comment) @comment
+
+directive: ("#") @keyword ; #if
+type: ("type_of") @type
+
+(compiler_directive) @keyword
+(heredoc_start) @none
+(heredoc_end) @none
+(heredoc_body) @string
