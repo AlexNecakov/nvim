@@ -61,6 +61,7 @@ return {
                 "html",
                 "lua_ls",
                 "powershell_es",
+                "pyright",
                 "tailwindcss",
                 "ts_ls",
             },
