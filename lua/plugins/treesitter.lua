@@ -6,7 +6,7 @@ return {
         parser_config.jai = {
             install_info = {
                 url = "https://github.com/constantitus/tree-sitter-jai",
-                files = { "src/parser.c" },
+                files = { "src/parser.c", "src/scanner.c" },
                 branch = "master",
             },
             filetype = "jai",
@@ -30,7 +30,6 @@ return {
                 "go",
                 "html",
                 "http",
-                "jai",
                 "json",
                 "lua",
                 "markdown",
