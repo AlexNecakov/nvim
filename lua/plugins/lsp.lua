@@ -60,9 +60,6 @@ return {
                 "clangd",
                 "html",
                 "lua_ls",
-                "powershell_es",
-                "pyright",
-                "tailwindcss",
                 "ts_ls",
             },
             automatic_installation = true,
@@ -72,21 +69,6 @@ return {
                 end,
             },
         })
-        require('lspconfig.configs').jails = {
-            default_config = {
-                cmd = { vim.fn.stdpath("config") .. "/lua/external/Jails/bin/jails" },
-                filetypes = { "jai" },
-                autostart = true,
-                root_dir = function()
-                    local root_dir = lsp_zero.dir.find_first({ "jails.json", 'build.jai', 'first.jai', 'main.jai' })
-                        or vim.fn.getcwd();
-                    return root_dir;
-                end,
-            }
-
-        }
-        require("lspconfig").jails.setup({})
-        vim.filetype.add({ extension = { jai = "jai", } })
 
         local luasnip = require("luasnip")
         cmp.setup({
