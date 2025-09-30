@@ -51,6 +51,19 @@ return {
             sign_text = true,
             lsp_attach = lsp_attach,
             capabilities = capabilities,
+            vim.diagnostic.config({
+                virtual_text = true,      -- Show inline text for diagnostics
+                signs = true,             -- Show signs in the sign column
+                update_in_insert = false, -- Don't update diagnostics while typing
+                underline = true,         -- Underline code with diagnostics
+                severity_sort = true,     -- Sort diagnostics by severity (errors first)
+                float = {
+                    border = 'rounded',   -- Optional: rounded borders for floating windows
+                    source = 'always',    -- Show source of diagnostic
+                    header = '',
+                    prefix = '',
+                },
+            })
         })
 
         require('fidget').setup({})
