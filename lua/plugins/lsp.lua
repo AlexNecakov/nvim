@@ -76,6 +76,7 @@ return {
                 "ts_ls",
             },
             automatic_installation = true,
+            automatic_enable = true,
             handlers = {
                 function(server_name) -- default handler (optional)
                     require("lspconfig")[server_name].setup {}
