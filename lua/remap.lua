@@ -37,14 +37,14 @@ vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower win
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
 if vim.fn.has('win32') == 1 then
-    vim.keymap.set("n", "<leader>b", ":!.\\build.bat", opts)
-    vim.keymap.set("n", "<leader>B", ":!.\\build_release.bat", opts)
-    vim.keymap.set("n", "<leader>db", ":!remedybg -g -q debugger.rdbg", opts)
-    vim.keymap.set("n", "<leader>r", ":!.\\run.bat", opts)
+    vim.keymap.set("n", "<leader>b", ":!.\\build.bat<CR>", opts)
+    vim.keymap.set("n", "<leader>B", ":!.\\build_release.bat<CR>", opts)
+    vim.keymap.set("n", "<leader>db", ":!remedybg -g -q debugger.rdbg<CR>", opts)
+    vim.keymap.set("n", "<leader>r", ":!.\\run.bat<CR>", opts)
 else
-    vim.keymap.set("n", "<leader>b", ":!.//build.sh", opts)
-    vim.keymap.set("n", "<leader>B", ":!.//build_release.sh", opts)
-    vim.keymap.set("n", "<leader>r", ":!.//run.sh", opts)
+    vim.keymap.set("n", "<leader>b", ":!.//build.sh<CR>", opts)
+    vim.keymap.set("n", "<leader>B", ":!.//build_release.sh<CR>", opts)
+    vim.keymap.set("n", "<leader>r", ":!.//run.sh<CR>", opts)
 end
 
 vim.keymap.set("n", "<leader>vpp", "<cmd>e " .. vim.fn.stdpath("config") .. "/lua/<cr>")
