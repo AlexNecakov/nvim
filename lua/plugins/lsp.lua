@@ -47,6 +47,8 @@ return {
             vim.cmd [[cabbrev wq execute "Format sync" <bar> wq]]
         end
 
+        local is_windows = vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1
+
         lsp_zero.extend_lspconfig({
             sign_text = true,
             lsp_attach = lsp_attach,
@@ -82,6 +84,27 @@ return {
                     require("lspconfig")[server_name].setup {}
                 end,
             },
+            clangd = function()
+                local clangd_config = {
+                    capabilities = capabilities,
+                    on_attach = lsp_attach,
+                }
+
+                if is_windows then
+                    clangd_config.cmd = {
+                        "clangd",
+                        "--query-driver=C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\*\\bin\\Hostx64\\x64\\cl.exe",
+                        "--background-index",
+                        "--clang-tidy",
+                        "--all-scopes-completion",
+                        "--completion-style=detailed",
+                        "--header-insertion=iwyu",
+                        "--pch-storage=memory",
+                    }
+                end
+
+                require("lspconfig").clangd.setup(clangd_config)
+            end,
         })
         vim.lsp.config['sourcekit'] = {
             capabilities = {
