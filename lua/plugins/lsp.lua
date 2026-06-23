@@ -42,8 +42,16 @@ return {
             vim.keymap.set("n", "<leader>vd", function() vim.diagnostic.open_float() end, opts)
             vim.keymap.set("n", "<leader>vca", function() vim.lsp.buf.code_action() end, opts)
             vim.keymap.set("n", "gR", function() vim.lsp.buf.rename() end, opts)
-            vim.keymap.set("n", "]d", function() vim.diagnostic.jump({ count = 1, float = true, wrap = true }) end, opts)
-            vim.keymap.set("n", "[d", function() vim.diagnostic.jump({ count = -1, float = true, wrap = true }) end, opts)
+            vim.keymap.set("n", "]d",
+                function()
+                    vim.diagnostic.jump({ count = 1, float = true, wrap = true })
+                    vim.cmd("normal! zz")
+                end, opts)
+            vim.keymap.set("n", "[d",
+                function()
+                    vim.diagnostic.jump({ count = -1, float = true, wrap = true })
+                    vim.cmd("normal! zz")
+                end, opts)
 
             require("lsp-format").setup {}
             require("lsp-format").on_attach(client, bufnr)
@@ -57,14 +65,14 @@ return {
             lsp_attach = lsp_attach,
             capabilities = capabilities,
             vim.diagnostic.config({
-                virtual_text = true,      -- Show inline text for diagnostics
-                signs = true,             -- Show signs in the sign column
-                update_in_insert = false, -- Don't update diagnostics while typing
-                underline = true,         -- Underline code with diagnostics
-                severity_sort = true,     -- Sort diagnostics by severity (errors first)
+                virtual_text = true,
+                signs = true,
+                update_in_insert = false,
+                underline = true,
+                severity_sort = true,
                 float = {
-                    border = 'rounded',   -- Optional: rounded borders for floating windows
-                    source = 'always',    -- Show source of diagnostic
+                    border = 'rounded',
+                    source = true,
                     header = '',
                     prefix = '',
                 },
@@ -83,7 +91,7 @@ return {
             automatic_installation = true,
             automatic_enable = true,
             handlers = {
-                function(server_name) -- default handler (optional)
+                function(server_name)
                     require("lspconfig")[server_name].setup {}
                 end,
             },

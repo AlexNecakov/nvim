@@ -9,7 +9,9 @@ vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
-vim.keymap.set("n", "<leader>zig", "<cmd>LspRestart<cr>")
+
+vim.keymap.set("n", "<leader>z", "<cmd>LspRestart<cr>")
+vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
 
 vim.keymap.set("x", "<leader>p", [["_dP]])
 
@@ -19,12 +21,11 @@ vim.keymap.set("n", "<leader>Y", [["+Y]])
 vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
 
 vim.keymap.set("n", "Q", "<nop>")
-vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
 
-vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
-vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+vim.keymap.set("v", "<leader>s", [["zy:%s/\V<C-r>z/<C-r>z/gI<Left><Left><Left>]])
+
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 
 vim.keymap.set("n", "<leader><leader>", function() vim.cmd("so") end)
@@ -36,15 +37,15 @@ vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right win
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
-if vim.fn.has('win32') == 1 then
-    vim.keymap.set("n", "<leader>b", ":!.\\build.bat<CR>", opts)
-    vim.keymap.set("n", "<leader>B", ":!.\\build_release.bat<CR>", opts)
-    vim.keymap.set("n", "<leader>db", ":!remedybg -g -q debugger.rdbg<CR>", opts)
-    vim.keymap.set("n", "<leader>r", ":!.\\run.bat<CR>", opts)
-else
-    vim.keymap.set("n", "<leader>b", ":!.//build.sh<CR>", opts)
-    vim.keymap.set("n", "<leader>B", ":!.//build_release.sh<CR>", opts)
-    vim.keymap.set("n", "<leader>r", ":!.//run.sh<CR>", opts)
-end
-
 vim.keymap.set("n", "<leader>vpp", "<cmd>e " .. vim.fn.stdpath("config") .. "/lua/<cr>")
+
+if vim.fn.has('win32') == 1 then
+    vim.keymap.set("n", "<leader>b", ":!.\\build.bat<CR>")
+    vim.keymap.set("n", "<leader>B", ":!.\\build_release.bat<CR>")
+    vim.keymap.set("n", "<leader>db", ":!remedybg -g -q debugger.rdbg<CR>")
+    vim.keymap.set("n", "<leader>r", ":!.\\run.bat<CR>")
+else
+    vim.keymap.set("n", "<leader>b", ":!.//build.sh<CR>")
+    vim.keymap.set("n", "<leader>B", ":!.//build_release.sh<CR>")
+    vim.keymap.set("n", "<leader>r", ":!.//run.sh<CR>")
+end

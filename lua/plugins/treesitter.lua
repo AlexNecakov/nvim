@@ -3,7 +3,7 @@ return {
     build = ":TSUpdate",
     branch = 'master',
     config = function()
-        local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
+        require("nvim-treesitter.parsers").get_parser_configs()
 
         require("nvim-treesitter.configs").setup({
             ensure_installed = {
@@ -30,6 +30,8 @@ return {
                 enable = true,
                 additional_vim_regex_highlighting = { "markdown" },
             },
+            modules = {},
+            ignore_install = {},
         })
     end
 }
