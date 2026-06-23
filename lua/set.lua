@@ -36,6 +36,9 @@ vim.g.netrw_browse_split = 0
 vim.g.netrw_liststyle = 1
 vim.g.netrw_sizestyle = "H"
 
+vim.g.loaded_ruby_provider = 0
+vim.g.loaded_perl_provider = 0
+
 if vim.fn.has('win32') == 1 then
     vim.opt.undodir = os.getenv("USERPROFILE") .. "/.vim/undodir"
     vim.o.shell = 'pwsh'
