@@ -12,7 +12,10 @@ return {
         "hrsh7th/cmp-path",
         "saadparwaiz1/cmp_luasnip",
         "j-hui/fidget.nvim",
-        "L3MON4D3/LuaSnip",
+        {
+            "L3MON4D3/LuaSnip",
+            run = "make install_jsregexp",
+        },
     },
     config = function()
         local lsp_zero = require('lsp-zero')
@@ -39,6 +42,8 @@ return {
             vim.keymap.set("n", "<leader>vd", function() vim.diagnostic.open_float() end, opts)
             vim.keymap.set("n", "<leader>vca", function() vim.lsp.buf.code_action() end, opts)
             vim.keymap.set("n", "gR", function() vim.lsp.buf.rename() end, opts)
+            vim.keymap.set("n", "]d", function() vim.diagnostic.jump({ count = 1, float = true, wrap = true }) end, opts)
+            vim.keymap.set("n", "[d", function() vim.diagnostic.jump({ count = -1, float = true, wrap = true }) end, opts)
 
             require("lsp-format").setup {}
             require("lsp-format").on_attach(client, bufnr)
