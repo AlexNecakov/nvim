@@ -48,5 +48,24 @@ return {
             builtin.grep_string({ search = vim.fn.input("Grep > ") })
         end)
         vim.keymap.set('n', '<leader>vh', builtin.help_tags, {})
+
+        local function live_grep_project_root()
+            local cwd = nil
+            local clients = vim.lsp.get_clients({ bufnr = 0 })
+            for _, client in ipairs(clients) do
+                if client.config and client.config.root_dir then
+                    cwd = client.config.root_dir
+                    break
+                end
+            end
+            if not cwd then
+                cwd = vim.fn.expand("%:p:h")
+            end
+            builtin.grep_string({
+                cwd = cwd,
+                search = vim.fn.input("Grep Buffer Root > "),
+            })
+        end
+        vim.keymap.set('n', '<leader>pg', live_grep_project_root)
     end
 }
